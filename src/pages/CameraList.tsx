@@ -1,6 +1,6 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan, faPencil, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faPencil, faPlusCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Request } from '../services/Request'; 
 import React, {useEffect, useState} from 'react';
 
@@ -51,6 +51,9 @@ export default function CameraList({ navigation }: CameraListProps) {
                     <View style={styles.flatListContent}>
                     
                         <View style={styles.imageView}>
+                            <TouchableOpacity style={styles.videoPlay}>
+                                <FontAwesomeIcon icon={faPlay} color="white" size='3x' />
+                            </TouchableOpacity>
                             <Image style={styles.imageContent} source={{uri:item.image_url}}/>
                         </View>
 
@@ -103,10 +106,23 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     imageContent: {
-        height: 250,
+        height: 200,
         borderTopStartRadius: 30,
         borderTopEndRadius: 30,
         resizeMode: 'stretch',
+        backgroundColor: "#fff",
+    },
+    videoPlay: {
+        width: '100%',
+        height: 200,
+        borderTopStartRadius: 30,
+        borderTopEndRadius: 30,
+        backgroundColor: "rgba(0, 0, 0, 0.20)",
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '10',
+
     },
     titleView: {
         flex: 1,

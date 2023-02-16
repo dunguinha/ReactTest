@@ -133,10 +133,12 @@ const styles = StyleSheet.create({
     inputText: {
         paddingLeft: '12px',
         paddingRight: '12px',
-        paddingVertical: '18px',
+        paddingVertical: '10px',
         borderColor: '#000',
         borderWidth: '1px',
         fontSize: '20px',
+        borderWidth: 0.5,
+        borderRadius: 8,
     },
     switchInput: {
         flexDirection: 'row',
