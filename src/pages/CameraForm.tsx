@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, Switch } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, Switch, ToastAndroid } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Request } from '../services/Request'; 
@@ -34,17 +34,28 @@ export default function CameraForm({ navigation, route }: CameraListProps) {
     }
 
     async function handleNew(){
-     
-        if (params.edit == false){
-            await request.createCamera(title, plan, external);
+        if (!title === false && !plan === false){      
+
+            if (params.edit == false){
+                await request.createCamera(title, plan, external);
+            }
+            if (params.edit == true){ 
+                await request.updateCamera(title, plan, external, params.id);
+            }
+            navigation.navigate("CameraList");
+        } 
+        if (!title.trim()){
+            alert(
+                'Digite o nome da câmera.',
+            );
+            return;
         }
-        if (params.edit == true){ 
-            await request.updateCamera(title, plan, external, params.id);
+        if (!plan.trim()){
+            alert( 
+                'Selecione o plano desejado.',
+            );
+            return;
         }
-
-
-        navigation.navigate("CameraList");
-
     }
   
     return (
@@ -135,7 +146,6 @@ const styles = StyleSheet.create({
         paddingRight: '12px',
         paddingVertical: '10px',
         borderColor: '#000',
-        borderWidth: '1px',
         fontSize: '20px',
         borderWidth: 0.5,
         borderRadius: 8,

@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 
 export default function MainRoutes() {
     return (
-        <NavigationContainer >
-            <Stack.Navigator initialRouteName='CameraList'   screenOptions={{headerShown: false}}>
-                <Stack.Screen name="CameraList" component={CameraList} options={{ headerShown: false }} />
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='CameraList' screenOptions={{headerShown: false}}>
+                <Stack.Screen name="CameraList" component={CameraList} />
                 <Stack.Screen name="CameraForm" component={CameraForm} />
             </Stack.Navigator>
         </NavigationContainer>

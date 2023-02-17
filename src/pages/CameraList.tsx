@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPencil, faPlusCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Request } from '../services/Request'; 
@@ -26,9 +26,6 @@ export default function CameraList({ navigation }: CameraListProps) {
         return unsubscribe;
     },[navigation]);
 
-
-  
-
     async function handleRemove(id: number){
         await request.deleteCamera(id);
 
@@ -42,10 +39,11 @@ export default function CameraList({ navigation }: CameraListProps) {
                     <FontAwesomeIcon style={{marginRight: 10}}icon={faPlusCircle} color="white" size='2x' />
                 </TouchableOpacity>
             </View>
-
-
             <FlatList
-                contentContainerStyle={styles.flatList}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+                style={{height: window.innerHeight - 60}}
+                contentContainerStyle={[styles.flatList]}
                 data={Object(camera)}
                 renderItem={({item}) => 
                     <View style={styles.flatListContent}>
@@ -72,6 +70,7 @@ export default function CameraList({ navigation }: CameraListProps) {
                 }
                 keyExtractor={item => item.id}
             />
+
         </SafeAreaView>
         
     );
@@ -80,13 +79,15 @@ export default function CameraList({ navigation }: CameraListProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        paddingTop: StatusBar.currentHeight,
     },
     header: {
         height: '60px',
         backgroundColor: '#0071BC',
         justifyContent: 'center',
-        alignItems: 'end',
+        alignItems: "flex-end",
+        width: '100%',
     },
     flatList: {
         flex: 1,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     imageContent: {
-        height: 200,
+        height: 220,
         borderTopStartRadius: 30,
         borderTopEndRadius: 30,
         resizeMode: 'stretch',
@@ -114,14 +115,14 @@ const styles = StyleSheet.create({
     },
     videoPlay: {
         width: '100%',
-        height: 200,
+        height: 220,
         borderTopStartRadius: 30,
         borderTopEndRadius: 30,
         backgroundColor: "rgba(0, 0, 0, 0.20)",
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: '10',
+        zIndex: 10,
 
     },
     titleView: {
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
         paddingVertical: '8px',
     },
     titleText: {
+        
     },
     smallIcons: {
     },

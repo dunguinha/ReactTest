@@ -10,7 +10,7 @@ export class Request{
         return response;
     }
 
-    async createCamera(title: string, plan: string, external: boolean){
+    async createCamera(title: string | boolean, plan: string | boolean, external: boolean){
         await fetch("http://localhost:5000/cameras", {
             method: "POST",
             body: JSON.stringify({
@@ -28,7 +28,7 @@ export class Request{
         });
     }
 
-    async updateCamera(title: string, plan: string, external: boolean, id: number){
+    async updateCamera(title: string | boolean, plan: string | boolean, external: boolean, id: number){
         await fetch(`http://localhost:5000/cameras/${id}`, {
             method: "PUT",
             body: JSON.stringify({
